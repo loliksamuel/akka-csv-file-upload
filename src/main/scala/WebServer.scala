@@ -19,27 +19,30 @@ import scala.concurrent.duration._
 object WebServer extends App {
   implicit val system = ActorSystem("my-system")
   implicit val materializer = ActorMaterializer()
-  // needed for the future flatMap/onComplete in the end
-  implicit val executionContext = system.dispatcher
+  implicit val executionContext = system.dispatcher// needed for the future flatMap/onComplete in the end
 
   val csvRowConsumerActor: ActorRef =  system.actorOf(CsvRowConsumerActor.props(), "consumer-actor")
 
-  implicit val csvAsUser = Unmarshaller.strict[ByteString, User] { byteString: ByteString =>
-    val splited = byteString.splitAt(4) // todo more complex
-    User(splited._1.asInstanceOf[Long], splited._2.toString())
-  }
+//  implicit val csvAsUser = Unmarshaller.strict[ByteString, User] { byteString: ByteString =>
+//    val splited = byteString.splitAt(4) // todo more complex
+//    User(splited._1.asInstanceOf[Long], splited._2.toString())
+//  }
 
 //  implicit val csvStreaming = EntityStreamingSupport.csv()
 
   val splitLines = Framing.delimiter(ByteString("\r\n"), 256, true)
 
   val route =
+
+    pathSingleSlash {
+      getFromResource("views/index.html")
+    } ~
     path("hello") {
       get {
         complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, "<h1>Say hello to akka-http</h1>"))
       }
     } ~
-      path("csv-upload") {
+      path("uploadFile") {
         entity(as[Multipart.FormData]) { formData =>
 
           val done: Future[Done] = formData.parts.mapAsync(1) {
@@ -61,9 +64,10 @@ object WebServer extends App {
         }
       }
 
-  val bindingFuture = Http().bindAndHandle(route, "localhost", 8080)
+  val bindingFuture: Future[Http.ServerBinding] = Http().bindAndHandle(route, "localhost", 8078)
+//val f : Future[Http.ServerBinding]=Http().bindAndHandle(  getRoute(flightDict, schema, impactCodingMap, modelMap, hist, spark)
 
-  println(s"Server online at http://localhost:8080/\nPress RETURN to stop...")
+  println(s"Server online at http://localhost:8078/\nPress RETURN to stop...")
   StdIn.readLine() // let it run until user presses return
   bindingFuture
     .flatMap(_.unbind()) // trigger unbinding from the port

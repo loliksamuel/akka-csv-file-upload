@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ML</title>
+</head>
+
+<body bgcolor="#FAEBD7">
+
+<div id="header">
+    <!-- header start -->
+    <link   rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" >Setoo Machine Learning Algorithms</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/index"        >Home</a></li>
+                <li><a href="/index"        >all algorithms</a></li>
+                <li><a href="/about"        >workflow overview</a></li>
+                <li><a href="/health"       >health check</a></li>
+                <li><a href="/params"       >configuration</a></li>
+
+                <li><a href="/upload"       >add new file</a></li>
+                <li><a href="/uploadModel"    >add new model</a></li>
+                <li><a href="/runModel"       >run model</a></li>
+
+
+            </ul>
+        </div>
+    </nav>
+
+
+
+</div>
+
+<div>
+ <H1> choose a prediction algorithm</H1>
+
+    <ol>
+
+
+
+
+
+
+
+
+
+        <li>
+            <div class="col-xs-12 table-responsive table-wrap">
+                <table border="1" class="table table-striped table-condensed table-hover">
+                    <thead>
+                    <tr  class="success">
+                        <td> predict probability of flights arrival delay using csv file upload with minimum data (csv file < 1gb  ) </td>
+                    </tr>
+                    <tr   >
+                        <td>
+                            <form method="POST" action="/uploadFile" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <input type="file" name="datafile" /><br/><br/>
+                                    <input type="submit" value="Submit" />
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </li>
+
+
+        <li>
+            <div class="col-xs-12 table-responsive table-wrap">
+                <table border="1" class="table table-striped table-condensed table-hover">
+                    <thead>
+                    <tr  class="success">
+                        <td>predict probability of single flight arrival delay (old api) </td>
+                    </tr>
+                    <tr><td>
+                        <a href="pricing_missed_connection?amount=100.0&threshold=60.0&flight_number=1224&airline_code=KQ&scheduled_departure_airport=CDG&scheduled_arrival_airport=AMS&scheduled_departure_time_utc=2018-02-14%2023:10">pricing_missed_connection?amount=100.0&threshold=60.0&flight_number=1224&airline_code=KQ&scheduled_departure_airport=CDG&scheduled_arrival_airport=AMS&scheduled_departure_time_utc=2018-02-14%2023:10</a>
+
+                    </td></tr>
+                    </thead>
+                </table>
+            </div>
+        </li>
+
+    </ol>
+</div>
+</body>
+</html>
