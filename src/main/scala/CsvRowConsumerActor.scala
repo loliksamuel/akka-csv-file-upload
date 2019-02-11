@@ -18,4 +18,3 @@ object CsvRowConsumerActor {
   case class ConsumeCsvRow(row: Vector[String])
 
 }
-
