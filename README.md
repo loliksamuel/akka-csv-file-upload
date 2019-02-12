@@ -1,7 +1,8 @@
 # akka-csv-file-upload
 
 ### using akka to upload csv file through rest api
-### start app
-### enter http://localhost:8078/
-### choose 4Columns.csv
-### see logs
+
+1. start app
+2. enter http://localhost:8078/
+3. choose 4Columns.csv
+4 see logs
